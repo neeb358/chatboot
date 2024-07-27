@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+        }
+
+        .chatbot-container {
+            width: 90%;
+            max-width: 400px;
+            height: 70%;
+            max-height: 500px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .chatbot-header {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background: #f1f1f1;
+        }
+
+        .chatbot-footer {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            font-size: 1em;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .message {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .user {
+            background: #6a11cb;
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background: #2575fc;
+            color: #fff;
+            align-self: flex-start;
+        }
+
+        .footer-info {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 12px;
+            width: 100%;
+        }
+
+        .footer-info a {
+            color: #ffb6c1;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .chatbot-container {
+                width: 100%;
+                height: 80%;
+            }
+
+            .message {
+                font-size: 0.8em;
+            }
+
+            #user-input, button {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-container">
+        <header class="chatbot-header">
+            <h1>Welcome to Chatbot</h1>
+        </header>
+        <div class="chatbot-messages" id="chatbot-messages"></div>
+        <footer class="chatbot-footer">
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </footer>
+    </div>
+    <div class="footer-info">
+       All Rights reserverved under session 2024 july 27 | Designed by Muneeb Ahmad | Email: <a href="mailto:neeb358@gmail.com">neeb358@gmail.com</a>
+    </div>
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const userMessage = userInput.value.trim();
+
+            if (userMessage === "") return;
+
+            displayMessage(userMessage, 'user');
+            displayMessage('Mera mood nahi answer kerne ka ', 'bot');
+
+            userInput.value = '';
+            userInput.focus();
+        }
+
+        function displayMessage(message, sender) {
+            const messageContainer = document.getElementById('chatbot-messages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.innerText = message;
+
+            messageContainer.appendChild(messageElement);
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
